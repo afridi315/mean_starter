@@ -1,0 +1,13 @@
+npm init - to initialize the project...
+npm text - to run the test portion of scripts in package json
+npm install - to install preprocessors etc.
+
+
+
+
+
+
+----
+Command used
+npm install pug
+npm uninstall pug
