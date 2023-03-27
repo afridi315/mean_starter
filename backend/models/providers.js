@@ -10,6 +10,7 @@ var providers = [
       city: "Bara",
       phone: "+923159223072",
       email: "enayat@codehunters.org",
+      description: "Software development and IT services company",
       tagline: "Code, the 21st Century\'s Oxygen!"
     }
   },{
@@ -23,6 +24,7 @@ var providers = [
         city: "Bara",
         phone: "+923125654435",
         email: "enayat@codehunters.org",
+        description: "Software development and IT services company",
         tagline: "Code, the 21st Century\'s Oxygen!"
     }
   },
