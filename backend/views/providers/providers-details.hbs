@@ -1,0 +1,30 @@
+<!-- Provider Details-->
+        <section class="page-section" id="provider-details">
+            <div class="container px-4 px-lg-5">
+                <h2 class="text-center mt-0">{{ company.company_name }}</h2>
+                <hr class="divider" />
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Tagline</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">{{ id }}</td>
+                                <td scope="row">{{ company.address }}</td>
+                                <td scope="row">{{ company.city }}</td>
+                                <td scope="row">{{ company.phone }}</td>
+                                <td scope="row">{{ company.tagline }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a href="/providers/edit/{{id}}" class="btn btn-secondary btn-sm">Edit</a>
+            </div>
+        </section>
