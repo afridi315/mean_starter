@@ -11,7 +11,13 @@ router.get('/details/:id', providersController.details);
 /* GET edit page. */
 router.get('/edit/:id', providersController.edit);
 
-/* GET update the edited data . */
+/* POST update the edited data . */
 router.post('/update/:id', providersController.update);
+
+/* GET add provider page. */
+router.get('/add-provider', providersController.addform);
+
+/* POST add the edited data . */
+router.post('/add', providersController.add);
 
 module.exports = router;
