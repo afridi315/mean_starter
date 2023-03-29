@@ -1,7 +1,7 @@
 var providers = [
   {
     id: 42343,
-    fistname: "Enayat",
+    firstname: "Enayat",
     lastname: "Afridi",
     position: "Cheif Executive Office",
     company: {
@@ -15,7 +15,7 @@ var providers = [
     }
   },{
     id: 42344,
-    fistname: "Janan",
+    firstname: "Janan",
     lastname: "Khan",
     position: "Project Manager",
     company: {
