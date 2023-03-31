@@ -1,4 +1,6 @@
 var providers = require("../models/providers.model");
+const providerDb = require('../db/db');
+const { ObjectId } = require('mongodb');
 
 //Utilility functions
 //Check if the list is empty
@@ -7,7 +9,7 @@ function isListEmpty(obj) {
 }
 
 //Check if ID already exists
-function checkExistingUID(id) {
+/* function checkExistingUID(id) {
     return providers.find( provider => provider.id == id);
 }
 //Generate a unique ID
@@ -18,19 +20,19 @@ function generatUID(providers) {
         var id = Math.floor(Math.random() * (max - min) + min)
     } while(checkExistingUID(id));
     return id;
-}
+} */
 
 //CRUD Operations
 
 // POST
 module.exports.create = function (req, res) {
     //Create random ID
-    if(isListEmpty(providers)) {
+    if (isListEmpty(providers)) {
         providers = [];
     }
 
     var id = req.body.id;
-    if(checkExistingUID(id)){
+    if (checkExistingUID(id)) {
         res.status(409); //Conflict with the current state of the target resource
         res.send('UID Already exists.');
         id = generatUID();      // get the new ID
@@ -38,23 +40,6 @@ module.exports.create = function (req, res) {
 
     var provider = req.body;
     provider.id = id;
-
-    //Creating provider
-    /* let provider = {
-        id : id,
-        firstname : req.body.firstname,
-        lastname : req.body.lastname,
-        position : req.body.position,
-        company : {
-            email : req.body.company.email,
-            phone : req.body.company.phone,
-            company_name : req.body.company.company,
-            address : req.body.company.address,
-            city : req.body.company.city,
-            tagline : req.body.company.tagline,
-            description : req.body.company.description
-        }
-    } */
 
     // Add new provide to the list
     providers.push(provider);
@@ -64,36 +49,57 @@ module.exports.create = function (req, res) {
 
 //GET all
 module.exports.readAll = function (req, res) {
-    if(isListEmpty(providers)) {
-        res.status(204)
-        res.send('No data, list is emplty.');
+
+    try {
+        providerDb.find()
+            .then(result => {
+                if (isListEmpty(result)) {
+                    console.log(result)
+                    res.status(204);
+                    res.send('No data. Nothing to read.');
+                }
+                res.status(200);
+                res.send(result);
+            })
+            .catch(error => handleError(res, error))
+    } catch (ex) {
+        handleError(res, ex)
     }
-    res.status(200);
-    res.send(providers);
-};
+
+}
 
 //GET one
 module.exports.readOne = function (req, res) {
-    if(isListEmpty(providers)) {
-        res.status(204)
-        res.send('No data, list is emplty.');
+
+    try {
+        let id = new ObjectId(req.params.id);
+        providerDb.find({ '_id': id })
+            .then(result => {
+                if (isListEmpty(result)) {
+                    res.status(204)
+                    res.send('No data. Nothing to read.');
+                }
+
+                res.status(200);
+                res.send(result)
+            }).catch(error => handleError(res, error))
+
+    } catch (ex) {
+        handleError(res, ex)
     }
-    let id = req.params.id;
-    let provider = providers.find( provider => provider.id == id);
-    res.status(200);
-    res.send(provider)
-};
+
+}
 
 //UPDATE
 module.exports.update = function (req, res) {
 
-    if(isListEmpty(providers)) {
+    if (isListEmpty(providers)) {
         res.status(204)
         res.send('No data, list is emplty.');
     }
-    
+
     let id = req.params.id;
-    let provider = providers.find( provider => provider.id == id);
+    let provider = providers.find(provider => provider.id == id);
 
     provider.firstname = req.body.firstname;
     provider.lastname = req.body.lastname;
@@ -112,24 +118,24 @@ module.exports.update = function (req, res) {
 
 //DELETE one
 module.exports.deleteOne = function (req, res) {
-    if(isListEmpty(providers)) {
+    if (isListEmpty(providers)) {
         res.status(204)
         res.send('No data, Cannot delete.');
     }
     let id = req.params.id;
-    let provider = providers.find( provider => provider.id == id);
+    let provider = providers.find(provider => provider.id == id);
     let index = providers.indexOf(provider);
 
     //Delete the provider at the index provided
     providers.splice(index, 1);
 
     res.status(200);
-    res.send(provider); 
+    res.send(provider);
 };
 
 //DELETE all
 module.exports.deleteAll = function (req, res) {
-    if(isListEmpty(providers)) {
+    if (isListEmpty(providers)) {
         res.status(204)
         res.send('No data, Cannot delete.');
     }
@@ -137,3 +143,8 @@ module.exports.deleteAll = function (req, res) {
     res.status(200);
     res.send('All providers are deleted!')
 };
+
+function handleError(res, error) {
+    res.status(200);
+    res.send('Something went wrong!\n' + error);
+}
