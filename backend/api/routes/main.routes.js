@@ -22,4 +22,16 @@ router.delete('/providers/:id', mainController.deleteOne);
 //DELETE all
 router.delete('/providers', mainController.deleteAll);
 
+//No matching API endpoints
+router.post('/*', notFoud);
+router.get('/*', notFoud);
+router.put('/*', notFoud);
+router.delete('/*', notFoud);
+
+//Not found handler function
+function notFoud(req, res) {
+    res.status(404)
+    res.send('Not valid endpoint!')
+}
+
 module.exports = router;

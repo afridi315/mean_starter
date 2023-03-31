@@ -112,30 +112,47 @@ module.exports.update = function (req, res) {
 
 //DELETE one
 module.exports.deleteOne = function (req, res) {
-    if (isListEmpty(providers)) {
-        res.status(204)
-        res.send('No data, Cannot delete.');
+
+    try {
+        let id = new ObjectId(req.params.id)
+        providerDb.findOneAndDelete({ '_id': id })
+            .then(result => {
+
+                if (isListEmpty(result)) {
+                    res.status(400)
+                    res.send('No data. Nothing to delete.');
+                }
+                res.status(200);
+                res.send(result);
+            })
+            .catch(error => {
+                handleError(res, error)
+            })
+
+    } catch (ex) {
+        handleError(res, ex)
     }
-    let id = req.params.id;
-    let provider = providers.find(provider => provider.id == id);
-    let index = providers.indexOf(provider);
-
-    //Delete the provider at the index provided
-    providers.splice(index, 1);
-
-    res.status(200);
-    res.send(provider);
 };
 
 //DELETE all
 module.exports.deleteAll = function (req, res) {
-    if (isListEmpty(providers)) {
-        res.status(204)
-        res.send('No data, Cannot delete.');
+    try {
+        providerDb.deleteMany({})
+            .then(result => {
+                if (result.deletedCount === 0) {
+                    res.status(204)
+                    res.send('No data. Nothing to delete.');
+                }
+                res.status(200);
+                res.send('All providers are deleted!')
+            })
+            .catch(error => {
+                handleError(res, error)
+            })
+
+    } catch (ex) {
+        handleError(res, ex)
     }
-    providers = [];
-    res.status(200);
-    res.send('All providers are deleted!')
 };
 
 function handleError(res, error) {
