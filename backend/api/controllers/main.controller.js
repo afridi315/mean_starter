@@ -89,27 +89,25 @@ module.exports.readOne = function (req, res) {
 //UPDATE
 module.exports.update = function (req, res) {
 
-    if (isListEmpty(providers)) {
-        res.status(204)
-        res.send('No data, list is emplty.');
+    try {
+        let id = new ObjectId(req.params.id)
+        let provider = req.body;
+        providerDb.findOneAndUpdate({ '_id': id }, provider, { new: true })
+            .then(result => {
+                if (isListEmpty(result)) {
+                    res.status(204)
+                    res.send('No data. Nothing to update.');
+                }
+                res.status(200);
+                res.send(result)
+            })
+            .catch(error => {
+                handleError(res, error)
+            })
+    } catch (ex) {
+        handleError(res, ex)
     }
 
-    let id = req.params.id;
-    let provider = providers.find(provider => provider.id == id);
-
-    provider.firstname = req.body.firstname;
-    provider.lastname = req.body.lastname;
-    provider.position = req.body.position;
-    provider.company.email = req.body.company.email;
-    provider.company.phone = req.body.company.phone;
-    provider.company.company_name = req.body.company.company;
-    provider.company.address = req.body.company.address;
-    provider.company.city = req.body.company.city;
-    provider.company.tagline = req.body.company.tagline;
-    provider.company.description = req.body.company.description;
-
-    res.status(200);
-    res.send(provider)
 };
 
 //DELETE one
