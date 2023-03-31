@@ -26,26 +26,22 @@ function generatUID(providers) {
 
 // POST
 module.exports.create = function (req, res) {
-    //Create random ID
-    if (isListEmpty(providers)) {
-        providers = [];
+
+    try {
+        var provider = req.body;
+        providerDb.create(provider)
+            .then(result => {
+                res.status(201);
+                res.send(result);
+            })
+            .catch(error => {
+                handleError(res, error);
+            })
+
+    } catch (ex) {
+        handleError(res, ex)
     }
-
-    var id = req.body.id;
-    if (checkExistingUID(id)) {
-        res.status(409); //Conflict with the current state of the target resource
-        res.send('UID Already exists.');
-        id = generatUID();      // get the new ID
-    }
-
-    var provider = req.body;
-    provider.id = id;
-
-    // Add new provide to the list
-    providers.push(provider);
-    res.status(200);
-    res.send(provider);
-};
+}
 
 //GET all
 module.exports.readAll = function (req, res) {

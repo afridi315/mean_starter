@@ -9,7 +9,7 @@ const companySchema = new schema({
     address: {type: String, required: true},
     city: {type: String, required: true},
     phone: {type: String, required: true, min: 11, max: 13},
-    email: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
     description: String,
     tagline: String
 });
