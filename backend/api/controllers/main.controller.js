@@ -1,16 +1,46 @@
 var providers = require("../models/providers.model");
 
+//Utilility functions
+//Check if the list is empty
+function isListEmpty(obj) {
+    return (!obj || obj.length == 0 || Object.keys(obj).length == 0);
+}
+
+//Check if ID already exists
+function checkExistingUID(id) {
+    return providers.find( provider => provider.id == id);
+}
+//Generate a unique ID
+function generatUID(providers) {
+    let min = 100000;
+    let max = 999999;
+    do {
+        var id = Math.floor(Math.random() * (max - min) + min)
+    } while(checkExistingUID(id));
+    return id;
+}
+
 //CRUD Operations
 
 // POST
 module.exports.create = function (req, res) {
     //Create random ID
-    let min = 100000;
-    let max = 999999;
-    let id = Math.floor(Math.random() * (max - min) + min)
+    if(isListEmpty(providers)) {
+        providers = [];
+    }
+
+    var id = req.body.id;
+    if(checkExistingUID(id)){
+        res.status(409); //Conflict with the current state of the target resource
+        res.send('UID Already exists.');
+        id = generatUID();      // get the new ID
+    }
+
+    var provider = req.body;
+    provider.id = id;
 
     //Creating provider
-    let provider = {
+    /* let provider = {
         id : id,
         firstname : req.body.firstname,
         lastname : req.body.lastname,
@@ -24,7 +54,7 @@ module.exports.create = function (req, res) {
             tagline : req.body.company.tagline,
             description : req.body.company.description
         }
-    }
+    } */
 
     // Add new provide to the list
     providers.push(provider);
@@ -34,12 +64,20 @@ module.exports.create = function (req, res) {
 
 //GET all
 module.exports.readAll = function (req, res) {
+    if(isListEmpty(providers)) {
+        res.status(204)
+        res.send('No data, list is emplty.');
+    }
     res.status(200);
     res.send(providers);
 };
 
 //GET one
 module.exports.readOne = function (req, res) {
+    if(isListEmpty(providers)) {
+        res.status(204)
+        res.send('No data, list is emplty.');
+    }
     let id = req.params.id;
     let provider = providers.find( provider => provider.id == id);
     res.status(200);
@@ -48,6 +86,12 @@ module.exports.readOne = function (req, res) {
 
 //UPDATE
 module.exports.update = function (req, res) {
+
+    if(isListEmpty(providers)) {
+        res.status(204)
+        res.send('No data, list is emplty.');
+    }
+    
     let id = req.params.id;
     let provider = providers.find( provider => provider.id == id);
 
@@ -68,6 +112,10 @@ module.exports.update = function (req, res) {
 
 //DELETE one
 module.exports.deleteOne = function (req, res) {
+    if(isListEmpty(providers)) {
+        res.status(204)
+        res.send('No data, Cannot delete.');
+    }
     let id = req.params.id;
     let provider = providers.find( provider => provider.id == id);
     let index = providers.indexOf(provider);
@@ -81,6 +129,10 @@ module.exports.deleteOne = function (req, res) {
 
 //DELETE all
 module.exports.deleteAll = function (req, res) {
+    if(isListEmpty(providers)) {
+        res.status(204)
+        res.send('No data, Cannot delete.');
+    }
     providers = [];
     res.status(200);
     res.send('All providers are deleted!')
