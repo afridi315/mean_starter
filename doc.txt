@@ -1,5 +1,5 @@
 npm init - to initialize the project...
-npm text - to run the test portion of scripts in package json
+npm test - to run the test portion of scripts in package json
 npm install - to install preprocessors etc.
 
 
@@ -11,3 +11,7 @@ npm install - to install preprocessors etc.
 Command used
 npm install pug
 npm uninstall pug
+
+
+To create angular app
+ng new name-of-the-project
