@@ -14,7 +14,7 @@ npm uninstall pug
 
 
 To create angular app
-ng new name-of-the-project
+ng new name-of-the-project --routing
 
 To create a component
 ng g c component-name

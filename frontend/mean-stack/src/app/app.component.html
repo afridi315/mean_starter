@@ -24,56 +24,6 @@
 
 <div class="content" role="main">
 
-  <!-- Property binging example -->
-  <h1 style="{{ red }}">{{ title }}</h1>
-  <h2 [style] = "green">{{ sum() }}</h2>
-
-  <!-- Event binding example -->
-  <div>
-    <input #inputMessage type="text" [(ngModel)] = "message">
-    <button (click)="clickMe( 'Hi there!' )">Click Me!</button>
-    <!-- property binding (getting value back from the component) -->
-    <h3>{{ message }}</h3>
-  </div>
-  <div>
-    <button (click)="toggle()">Show/Hide</button>
-
-    <!-- First method -->
-    <!-- <h3 *ngIf="show; else showPublic">Secrete Message</h3>
-    <ng-template #showPublic>
-      <h3>Public Message</h3>
-    </ng-template> -->
-
-    <!-- Seconda method (best one) -->
-    <ng-template *ngIf="show; then showPrivate else showPublic"></ng-template>
-
-    <ng-template #showPrivate>
-      <h3>Secrete Message</h3>
-    </ng-template>
-    
-    <ng-template #showPublic>
-      <h3>Public Message</h3>
-    </ng-template>
-
-  </div>
-
-  <div>
-    <button (click)="inc()">+</button>
-    <button (click)="dec()">-</button>
-    <table>
-      <ng-container *ngFor="let num of nums; index as i; count as total; even as even; odd as odd">
-        <tr [style]="even ? bggreen : bgred" style="color:white; text-align: center;">
-          <td style="width: 50px;">{{ i + 1 }}</td>
-          <td style="width: 100px;">{{ num }}</td>
-        </tr>
-      </ng-container>
-    </table>
-  </div>
-
-  <div>
-    <app-about></app-about>
-    <app-login></app-login>
-    <app-register></app-register>
-  </div>
+  <router-outlet></router-outlet>
 
 </div>
