@@ -29,8 +29,8 @@
   <h2 [style] = "green">{{ sum() }}</h2>
 
   <!-- Event binding example -->
-  <input #inputMessage type="text">
-  <button (click)="clickMe( inputMessage.value )">Click Me!</button>
+  <input #inputMessage type="text" [(ngModel)] = "message">
+  <button (click)="clickMe( 'Hi there!' )">Click Me!</button>
   <!-- property binding (getting value back from the component) -->
   <h3>{{ message }}</h3>
 
