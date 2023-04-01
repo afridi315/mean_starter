@@ -17,4 +17,8 @@ To create angular app
 ng new name-of-the-project
 
 To create a component
-ng g c componenet-name
+ng g c component-name
+ng g c component-name --s --skip-tests  //skip stylesheets and tests
+
+To create module (m or module)
+ng g m module-name --module=the-module-you-want-to-be-added-in
