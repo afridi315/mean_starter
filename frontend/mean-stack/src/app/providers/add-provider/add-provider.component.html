@@ -14,39 +14,41 @@
                     <!-- Name input-->
                     <div class="row g-2">
                           <div class="col-lg-6 mb-3">
+                            <span class="text-danger" *ngIf="f['firstname'].touched && f['firstname'].errors?.['required']">*Required</span>
                             <div class="form-floating ">
                                 <input class="form-control" formControlName="firstname" type="text" placeholder="Enter your first name..."  />
                                 <label for="name">First name</label>
-                                <div class="invalid-feedback" data-sb-feedback="firstname:required">A first name is required.</div>
+                                <div class="text-danger" *ngIf="f['firstname'].touched && f['firstname'].errors?.['minlength']">A minimun 4 charachters are required.</div>
                             </div>
                         </div>
                           <div class="col-lg-6 mb-3">
+                            <span class="text-danger" *ngIf="f['lastname'].touched && f['lastname'].errors?.['required']">*Required</span>
                             <div class="form-floating">
                                 <input class="form-control" formControlName="lastname" type="text" placeholder="Enter your last name..."  />
                                 <label for="name">Last name</label>
-                                <div class="invalid-feedback" data-sb-feedback="lastname:required">A last name is required.</div>
+                                <div class="text-danger" *ngIf="f['lastname'].touched && f['lastname'].errors?.['minlength']">A minimun 3 charachters are required.</div>
                             </div>
                         </div>
                           <div class="col-lg-12 mb-3">
                             <div class="form-floating">
                                 <input class="form-control" formControlName="position" type="text" placeholder="Enter your position..."  />
                                 <label for="name">Position</label>
-                                <div class="invalid-feedback" data-sb-feedback="position:required">A Position is required.</div>
+                                <div class="text-danger" *ngIf="f['position'].touched && f['position'].errors?.['required']">A Position is required.</div>
                             </div>
                         </div>
                           <div class="col-lg-6 mb-3">
                             <div class="form-floating ">
                                 <input class="form-control" formControlName="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
                                 <label for="email">Email address</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                <div class="text-danger" *ngIf="f['email'].touched && f['email'].errors?.['email']">Email is not valid.</div>
                             </div>
                         </div>
                           <div class="col-lg-6 mb-3">
                             <div class="form-floating ">
-                                <input class="form-control" formControlName="phone" type="tel" placeholder="(123) 456-7890" />
+                                <input class="form-control" formControlName="phone" type="tel" placeholder="0300 123 4567" />
                                 <label for="phone">Phone number</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                                <div class="text-danger" *ngIf="f['phone'].touched && f['phone'].errors?.['minlength']">Phone number must be at least 11 digits.</div>
+                                <div class="text-danger" *ngIf="f['phone'].touched && f['phone'].errors?.['maxlength']">Phone number must not exceed 13 digits.</div>
                             </div>
                         </div>
                         <hr class="divider" />
@@ -54,35 +56,35 @@
                             <div class="form-floating">
                                 <input class="form-control" formControlName="company_name" type="text" placeholder="Enter your company..." />
                                 <label for="name">Company</label>
-                                <div class="invalid-feedback" data-sb-feedback="company_name:required">A company name is required.</div>
+                                <div class="text-danger" *ngIf="f['company_name'].touched && f['company_name'].errors?.['required']">A company name is required.</div>
                             </div>
                         </div>
                           <div class="col-lg-12 mb-3">
                             <div class="form-floating">
                                 <input class="form-control" formControlName="address" type="text" placeholder="Enter your address..." />
                                 <label for="name">Address</label>
-                                <div class="invalid-feedback" data-sb-feedback="address:required">A address is required.</div>
+                                <div class="text-danger" *ngIf="f['address'].touched && f['address'].errors?.['required']">A address is required.</div>
                             </div>
                         </div>
                           <div class="col-lg-12 mb-3">
                             <div class="form-floating">
                                 <input class="form-control" formControlName="city" type="text" placeholder="Enter your city..." />
                                 <label for="name">City</label>
-                                <div class="invalid-feedback" data-sb-feedback="city:required">A city is required.</div>
+                                <div class="text-danger" *ngIf="f['city'].touched && f['city'].errors?.['required']">A city is required.</div>
                             </div>
                         </div>
                           <div class="col-lg-12 mb-3">
                             <div class="form-floating">
                                 <input class="form-control" formControlName="tagline" type="text" placeholder="Enter your tagline..." />
                                 <label for="name">Tagline</label>
-                                <div class="invalid-feedback" data-sb-feedback="tagline:required">A tagline is required.</div>
+                                <div class="text-danger" *ngIf="f['tagline'].touched && f['tagline'].errors?.['required']">A tagline is required.</div>
                             </div>
                         </div>
                           <div class="col-lg-12 mb-3">
                             <div class="form-floating">
                                 <textarea class="form-control" formControlName="description" type="text" placeholder="Enter your description here..." style="height: 10rem"></textarea>
                                 <label for="description">Description</label>
-                                <div class="invalid-feedback" data-sb-feedback="description:required">A description is required.</div>
+                                <div class="text-danger" *ngIf="f['description'].touched && f['description'].errors?.['required']">A description is required.</div>
                             </div>
                         </div>
                     </div>
@@ -102,7 +104,7 @@
                     <!-- an error submitting the form-->
                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending eidts!</div></div>
                     <!-- Submit Button-->
-                    <div class="d-grid mt-5"><button class="btn btn-primary btn-xl" id="submitButton" type="submit">Add Provider</button></div>
+                    <div class="d-grid mt-5"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" [disabled]="providerForm.invalid">Add Provider</button></div>
                 </form>
             </div>
         </div>

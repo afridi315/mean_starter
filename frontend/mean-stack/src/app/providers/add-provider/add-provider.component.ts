@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Providers } from 'src/app/models/providers.model';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { providers } from 'src/app/models/providers.data';
 
 @Component({
@@ -19,21 +19,24 @@ export class AddProviderComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.providerForm = new FormGroup({
-			firstname: new FormControl(),
-			lastname: new FormControl(),
-			position: new FormControl(),
-			company_name: new FormControl(),
-			address: new FormControl(),
-			city: new FormControl(),
-			phone: new FormControl(),
-			email: new FormControl(),
-			description: new FormControl(),
-			tagline: new FormControl()
+			firstname: new FormControl('', [Validators.required, Validators.minLength(4)]),
+			lastname: new FormControl('', [Validators.required, Validators.minLength(3)]),
+			position: new FormControl('', [Validators.required]),
+			company_name: new FormControl('', [Validators.required]),
+			address: new FormControl('', [Validators.required]),
+			city: new FormControl('', [Validators.required]),
+			phone: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(13)]),
+			email: new FormControl('', [Validators.email]),
+			description: new FormControl('', [Validators.required, Validators.minLength(5)]),
+			tagline: new FormControl('', [Validators.required, Validators.minLength(5)])
 		})
 	}
 
 	title = "Mean Stack"
 
+	//Get quick access to the form controls
+	get f() { return this.providerForm.controls; }
+	
 	handleSubmit() {
 
 		console.log(this.providerForm.value);
