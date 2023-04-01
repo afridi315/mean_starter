@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
 import { AboutComponent } from "./about.component";
 
 @NgModule({
@@ -6,7 +7,7 @@ import { AboutComponent } from "./about.component";
     declarations: [
         AboutComponent
     ],
-    imports: [],
+    imports: [RouterModule],
     exports: [
         AboutComponent
     ],
