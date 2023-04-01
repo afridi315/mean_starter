@@ -10,6 +10,8 @@ import { ProvidersComponent } from './providers/providers.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NavComponent } from './nav/nav.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
     ProvidersComponent,
     ContactComponent,
     NotfoundComponent,
+    NavComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

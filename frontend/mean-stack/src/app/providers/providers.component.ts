@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { providers } from '../models/providers.data';
 
 @Component({
   selector: 'app-providers',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProvidersComponent implements OnInit {
 
+  providers = providers;
   constructor() { }
 
   ngOnInit(): void {
