@@ -29,9 +29,32 @@
   <h2 [style] = "green">{{ sum() }}</h2>
 
   <!-- Event binding example -->
-  <input #inputMessage type="text" [(ngModel)] = "message">
-  <button (click)="clickMe( 'Hi there!' )">Click Me!</button>
-  <!-- property binding (getting value back from the component) -->
-  <h3>{{ message }}</h3>
+  <div>
+    <input #inputMessage type="text" [(ngModel)] = "message">
+    <button (click)="clickMe( 'Hi there!' )">Click Me!</button>
+    <!-- property binding (getting value back from the component) -->
+    <h3>{{ message }}</h3>
+  </div>
+  <div>
+    <button (click)="toggle()">Show/Hide</button>
+
+    <!-- First method -->
+    <!-- <h3 *ngIf="show; else showPublic">Secrete Message</h3>
+    <ng-template #showPublic>
+      <h3>Public Message</h3>
+    </ng-template> -->
+
+    <!-- Seconda method (best one) -->
+    <ng-template *ngIf="show; then showPrivate else showPublic"></ng-template>
+    
+    <ng-template #showPrivate>
+      <h3>Secrete Message</h3>
+    </ng-template>
+    
+    <ng-template #showPublic>
+      <h3>Public Message</h3>
+    </ng-template>
+
+  </div>
 
 </div>

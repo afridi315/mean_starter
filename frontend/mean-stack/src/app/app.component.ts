@@ -21,4 +21,9 @@ export class AppComponent {
 		console.log(val)
 		this.message = val
 	}
+
+	show = true;
+	toggle = () => {
+		this.show = !this.show;
+	}
 }
