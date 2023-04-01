@@ -6,18 +6,17 @@ import { AppComponent } from './app.component';
 import { AboutModule } from './about/about.module';
 import { UserModule } from './user/user.module';
 import { HomeComponent } from './home/home.component';
-import { ProvidersComponent } from './providers/providers.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
+import { ProvidersModule } from './providers/providers.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ProvidersComponent,
     ContactComponent,
     NotfoundComponent,
     NavComponent,
@@ -28,7 +27,8 @@ import { FooterComponent } from './footer/footer.component';
     AppRoutingModule,
     FormsModule,
     AboutModule,
-    UserModule
+    UserModule,
+    ProvidersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
