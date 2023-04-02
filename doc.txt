@@ -22,3 +22,6 @@ ng g c component-name --s --skip-tests  //skip stylesheets and tests
 
 To create module (m or module)
 ng g m module-name --module=the-module-you-want-to-be-added-in
+
+To create a service
+ng g s service-name --skip-tests
