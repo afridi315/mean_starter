@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Providers } from 'src/app/models/providers.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { providers } from 'src/app/models/providers.data';
+//import { providers } from 'src/app/models/providers.data';
 
 @Component({
 	selector: 'app-add-provider',
@@ -42,29 +42,28 @@ export class AddProviderComponent implements OnInit {
 		console.log(this.providerForm.value);
 
 		let newId: number;
-		while (true) {
+		/* while (true) {
 			newId = Math.floor(Math.random() * 10000) + 99999
-			if (providers.findIndex(el => el.id == newId) === -1) {
+			if (provide.findIndex((el: { id: number; }) => el.id == newId) === -1) {
 				break;
 			}
-		}
+		} */
 
 		let p = this.providerForm.value;
-		this.provider.id = newId;
+		this.provider.id = p.id;	//newId;
 		this.provider.firstname = p.firstname
 		this.provider.lastname = p.lastname
 		this.provider.position = p.position
-		this.provider.company = {
-			company_name: p.company_name,
-			address: p.address,
-			city: p.city,
-			phone: p.phone,
-			email: p.email,
-			description: p.description,
-			tagline: p.tagline
-		}
+		this.provider.company_name = p.company_name,
+		this.provider.address = p.address,
+		this.provider.city = p.city,
+		this.provider.phone = p.phone,
+		this.provider.email = p.email,
+		this.provider.description = p.description,
+		this.provider.tagline = p.tagline
+		
 
-		providers.push(this.provider);
+		//providers.push(this.provider);
 		this.submitted = true;
 	}
 }
