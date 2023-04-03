@@ -1,1 +1,103 @@
-<p>edit-provider works!</p>
+<!-- Contact-->
+<section class="page-section" id="contact">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6 text-center">
+                <h2 class="mt-0">{{ title }}</h2>
+                <hr class="divider" />
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+            <div class="col-lg-8">
+                <h1 class="mt-0 text-info" *ngIf="submitted">Updated successfully!</h1>
+                <h5 class="mt-0 aler alert-danger" *ngIf="isEmailExists()">*Error: This email address already exists. Try a different one!</h5>
+                <form class="user" [formGroup]="providerForm" *ngIf="!submitted && ready else loading" (ngSubmit)="handleSubmit()">
+                    <!-- Name input-->
+                    <div class="row g-2">
+                          <div class="col-lg-6 mb-3">
+                            <span class="text-danger" *ngIf="f['firstname'].touched && f['firstname'].errors?.['required']">*Required</span>
+                            <div class="form-floating ">
+                                <input class="form-control" formControlName="firstname" type="text" placeholder="Enter your first name..."  />
+                                <label for="name">First name</label>
+                                <div class="text-danger" *ngIf="f['firstname'].touched && f['firstname'].errors?.['minlength']">A minimun 4 charachters are required.</div>
+                            </div>
+                        </div>
+                          <div class="col-lg-6 mb-3">
+                            <span class="text-danger" *ngIf="f['lastname'].touched && f['lastname'].errors?.['required']">*Required</span>
+                            <div class="form-floating">
+                                <input class="form-control" formControlName="lastname" type="text" placeholder="Enter your last name..."  />
+                                <label for="name">Last name</label>
+                                <div class="text-danger" *ngIf="f['lastname'].touched && f['lastname'].errors?.['minlength']">A minimun 3 charachters are required.</div>
+                            </div>
+                        </div>
+                          <div class="col-lg-12 mb-3">
+                            <div class="form-floating">
+                                <input class="form-control" formControlName="position" type="text" placeholder="Enter your position..."  />
+                                <label for="name">Position</label>
+                                <div class="text-danger" *ngIf="f['position'].touched && f['position'].errors?.['required']">A Position is required.</div>
+                            </div>
+                        </div>
+                          <div class="col-lg-6 mb-3">
+                            <div class="form-floating ">
+                                <input class="form-control" formControlName="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                                <label for="email">Email address</label>
+                                <div class="text-danger" *ngIf="f['email'].touched && f['email'].errors?.['email']">Email is not valid.</div>
+                            </div>
+                        </div>
+                          <div class="col-lg-6 mb-3">
+                            <div class="form-floating ">
+                                <input class="form-control" formControlName="phone" type="tel" placeholder="0300 123 4567" />
+                                <label for="phone">Phone number</label>
+                                <div class="text-danger" *ngIf="f['phone'].touched && f['phone'].errors?.['minlength']">Phone number must be at least 11 digits.</div>
+                                <div class="text-danger" *ngIf="f['phone'].touched && f['phone'].errors?.['maxlength']">Phone number must not exceed 13 digits.</div>
+                            </div>
+                        </div>
+                        <hr class="divider" />
+                          <div class="col-lg-12 mb-3">
+                            <div class="form-floating">
+                                <input class="form-control" formControlName="company_name" type="text" placeholder="Enter your company..." />
+                                <label for="name">Company</label>
+                                <div class="text-danger" *ngIf="f['company_name'].touched && f['company_name'].errors?.['required']">A company name is required.</div>
+                            </div>
+                        </div>
+                          <div class="col-lg-12 mb-3">
+                            <div class="form-floating">
+                                <input class="form-control" formControlName="address" type="text" placeholder="Enter your address..." />
+                                <label for="name">Address</label>
+                                <div class="text-danger" *ngIf="f['address'].touched && f['address'].errors?.['required']">A address is required.</div>
+                            </div>
+                        </div>
+                          <div class="col-lg-12 mb-3">
+                            <div class="form-floating">
+                                <input class="form-control" formControlName="city" type="text" placeholder="Enter your city..." />
+                                <label for="name">City</label>
+                                <div class="text-danger" *ngIf="f['city'].touched && f['city'].errors?.['required']">A city is required.</div>
+                            </div>
+                        </div>
+                          <div class="col-lg-12 mb-3">
+                            <div class="form-floating">
+                                <input class="form-control" formControlName="tagline" type="text" placeholder="Enter your tagline..." />
+                                <label for="name">Tagline</label>
+                                <div class="text-danger" *ngIf="f['tagline'].touched && f['tagline'].errors?.['required']">A tagline is required.</div>
+                            </div>
+                        </div>
+                          <div class="col-lg-12 mb-3">
+                            <div class="form-floating">
+                                <textarea class="form-control" formControlName="description" type="text" placeholder="Enter your description here..." style="height: 10rem"></textarea>
+                                <label for="description">Description</label>
+                                <div class="text-danger" *ngIf="f['description'].touched && f['description'].errors?.['required']">A description is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button-->
+                    <div class="d-grid mt-5"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" [disabled]="providerForm.invalid">Update Provider</button></div>
+                </form>
+
+                <ng-template #loading>
+                    <h3 class="text-info" *ngIf="!submitted">Loading...</h3>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</section>

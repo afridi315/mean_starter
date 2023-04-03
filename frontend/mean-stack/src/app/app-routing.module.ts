@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AddProviderComponent } from './providers/add-provider/add-provider.component';
+import { EditProviderComponent } from './providers/edit-provider/edit-provider.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { RegisterComponent } from './register/register.component';
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'providers', component: ProvidersComponent },
   { path: 'providers/add-provider', component: AddProviderComponent },
+  { path: 'providers/edit/:id', component: EditProviderComponent },
   { path: '**', component: NotfoundComponent }
 ];
 

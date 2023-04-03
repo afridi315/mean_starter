@@ -1,6 +1,5 @@
 var providers = require("../models/providers.model");
 const providerDb = require('../db/db');
-const { ObjectId } = require('mongodb');
 
 //Utilility functions
 //Check if the list is empty
@@ -50,7 +49,6 @@ module.exports.readAll = function (req, res) {
         providerDb.find()
             .then(result => {
                 if (isListEmpty(result)) {
-                    console.log(result)
                     res.status(204);
                     res.send('No data. Nothing to read.');
                 }
@@ -68,8 +66,8 @@ module.exports.readAll = function (req, res) {
 module.exports.readOne = function (req, res) {
 
     try {
-        let id = new ObjectId(req.params.id);
-        providerDb.find({ '_id': id })
+        let id = req.params.id;
+        providerDb.find({ 'id': id })
             .then(result => {
                 if (isListEmpty(result)) {
                     res.status(204)
@@ -90,9 +88,9 @@ module.exports.readOne = function (req, res) {
 module.exports.update = function (req, res) {
 
     try {
-        let id = new ObjectId(req.params.id)
+        let id = req.params.id;
         let provider = req.body;
-        providerDb.findOneAndUpdate({ '_id': id }, provider, { new: true })
+        providerDb.findOneAndUpdate({ 'id': id }, provider, { new: true })
             .then(result => {
                 if (isListEmpty(result)) {
                     res.status(204)
@@ -114,8 +112,8 @@ module.exports.update = function (req, res) {
 module.exports.deleteOne = function (req, res) {
 
     try {
-        let id = new ObjectId(req.params.id)
-        providerDb.findOneAndDelete({ '_id': id })
+        let id = req.params.id;
+        providerDb.findOneAndDelete({ 'id': id })
             .then(result => {
 
                 if (isListEmpty(result)) {

@@ -4,13 +4,13 @@ export class Providers {
     firstname: string = '';
     lastname: string = '';
     position: string = '';
-    //company: {
-        company_name: string= '';
-        address: string= '';
-        city: string= '';
-        phone: string= '';
-        email: string= '';
-        description: string= '';
-        tagline: string= '';
-    //}
+    company!: {
+        company_name: string
+        address: string
+        city: string
+        phone: string
+        email: string
+        description: string
+        tagline: string
+    }
 }

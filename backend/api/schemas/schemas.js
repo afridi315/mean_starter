@@ -16,6 +16,7 @@ const companySchema = new schema({
 
 //Create schema (top leve document)
 const providerSchema = new schema({
+    id: { type: Number, required: true, unique: true },
     firstname: {type: String, required: true, min: 5},
     lastname: {type: String, required: true, min: 5},
     position: String,
